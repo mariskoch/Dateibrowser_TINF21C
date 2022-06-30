@@ -5,11 +5,7 @@ function GetValFromDataURL(dataURL) {
 function readyStateChangeFunction(req) {
     if (req.readyState === 4) {
         let response = JSON.parse(req.responseText);
-        if (req.status === 200) {
-            console.log(response);
-        } else {
-            console.log(response);
-        }
+        console.log(response);
     }
 }
 
