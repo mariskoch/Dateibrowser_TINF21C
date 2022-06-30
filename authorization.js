@@ -25,7 +25,7 @@ function login() {
 function testAuthorization() {
     let req = new XMLHttpRequest();
     req.open('GET', 'http://localhost:8080/', true);
-    req.setRequestHeader("Accept", "application/json")
+    req.setRequestHeader("Accept", "application/json");
     req.setRequestHeader("Authorization", identificationString);
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
