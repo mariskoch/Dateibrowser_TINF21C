@@ -15,15 +15,17 @@ function readyStateChangeFunction(req) {
 
 function addFile(event) {
     let fileReader = new FileReader();
-    let formData = new FormData();
+    let params = "";
+    //TODO: das ist asynchron... wie mache ich es, dass der rest erst weiterläuft, wenn das hier fertig ist?
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
-        formData.append("type", valFromDataURL[1]);
-        formData.append("content", valFromDataURL[2]);
+        console.log("type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2]);
+        params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
+        console.log("params: " + params);
     }
-    console.log(formData);
     let input = event.target.files[0];
     fileReader.readAsDataURL(input);
+    console.log(params);
 
     let url = "http://localhost:8080/" + input.name;
     let req = new XMLHttpRequest();
@@ -34,7 +36,8 @@ function addFile(event) {
     req.addEventListener("readystatechange", function () {
         readyStateChangeFunction(req);
     });
-    req.send(formData);
+    req.send(params);
+    console.log("end of method");
 }
 
 function refresh() {
