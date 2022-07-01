@@ -16,7 +16,8 @@
     <label for="username">Username: </label><input name="username" id="username" type="text"><br>
     <label for="password">Password: </label><input name="password" id="password" type="text"><br>
 </form>
-<button onclick="login();">Login</button><br>
+<button onclick="login();">Login</button>
+<br>
 <button onclick="logout();">Logout</button>
 <hr>
 <form id="fileUpload">
@@ -24,12 +25,11 @@
                                                          onchange="addFile(event);">
 </form>
 <hr>
-<form>
-    <label for="fileToDelete">insert filename of file to delete: </label><input type="text" id="fileToDelete">
-</form>
+<label for="toDelete">insert name of file/directory to delete: </label><input type="text" id="toDelete"><br>
 <button onclick="deleteFile();">delete file</button>
 <hr>
-<button onclick="refreshTable();">refresh</button>
+<label for="directoryToAdd">insert name of directory: </label><input type="text" id="directoryToAdd"><br>
+<button onclick="addDirectory();">add directory</button>
 <hr>
 <table id="fileList" border="1" style="width: 50%">
     <tr>

@@ -7,7 +7,6 @@ function addFile(event) {
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
         let params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
-
         let url = "http://localhost:8080/" + input.name;
         let req = new XMLHttpRequest();
         req.open('POST', url, true);
@@ -27,7 +26,7 @@ function addFile(event) {
 }
 
 function deleteFile() {
-    let fileName = document.getElementById("fileToDelete").value;
+    let fileName = document.getElementById("toDelete").value;
     let url = "http://localhost:8080/" + fileName;
     let req = new XMLHttpRequest();
     req.open('DELETE', url, true);
