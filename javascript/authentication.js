@@ -13,7 +13,7 @@ function login() {
                 refreshTable();
             } else {
                 clearTable();
-                document.getElementById("authenticationStatus").innerText = "logged out";
+                document.getElementById("authenticationStatus").innerText = "wrong credentials - logged out";
                 console.log(response);
                 sessionStorage.setItem("authenticationString", "");
             }
@@ -29,6 +29,7 @@ function logout() {
     req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
+            document.getElementById("authenticationStatus").innerText = "logged out";
             clearTable();
             let response = JSON.parse(req.responseText);
             if (req.status === 200) {
