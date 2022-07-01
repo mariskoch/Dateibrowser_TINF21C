@@ -7,10 +7,13 @@ function login() {
         if (req.readyState === 4) {
             let response = JSON.parse(req.responseText);
             if (req.status === 200) {
+                document.getElementById("authenticationStatus").innerText = "logged in";
                 console.log(response);
                 sessionStorage.setItem("authenticationString", "Basic " + btoa(formData.get("username") + ":" + response.token));
                 refreshTable();
             } else {
+                clearTable();
+                document.getElementById("authenticationStatus").innerText = "logged out";
                 console.log(response);
                 sessionStorage.setItem("authenticationString", "");
             }
