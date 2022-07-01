@@ -13,6 +13,7 @@ function login() {
                 document.getElementById("loginResult").innerText = " login success: " + response.token;
                 let identificationSetup = formData.get("username") + ":" + response.token;
                 identificationString = "Basic " + btoa(identificationSetup);
+                refresh();
             } else {
                 document.getElementById("loginResult").innerText = "login error: " + response.error;
                 identificationString = "";
@@ -47,6 +48,7 @@ function logout() {
     req.setRequestHeader("Authorization", identificationString);
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
+            clearTable();
             let response = JSON.parse(req.responseText);
             if (req.status === 200) {
                 document.getElementById("logoutResult").innerText = "logout success: " + response.message;
@@ -56,4 +58,12 @@ function logout() {
         }
     }
     req.send();
+}
+
+function clearTable() {
+    let table = document.getElementById("fileList");
+    table.innerHTML = `<tr>
+        <td colspan="1" style="width: 85%">Name</td>
+        <td colspan="1" style="width: 15%">Filetype</td>
+    </tr>`;
 }
