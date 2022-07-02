@@ -7,6 +7,7 @@
     <script type="text/javascript" src="../javascript/fileOperations.js"></script>
     <script type="text/javascript" src="../javascript/tableOperations.js"></script>
     <script type="text/javascript" src="../javascript/directoryOperations.js"></script>
+    <script type="text/javascript" src="../javascript/previewOperations.js"></script>
 </head>
 <body>
 <h3>Demonstration</h3>
@@ -35,6 +36,21 @@
 <button onclick="enterDirectory();">enter directory</button>
 <br>
 <button onclick="goToParentDirectory();">leave directory</button>
+<hr>
+<label for="preview">show preview: </label><input type="text" id="preview"><br>
+<button onclick="showPreview();">preview</button>
+<hr>
+<button onclick="enterDirectory();">enter directory</button>
+<br>
+<button onclick="goToParentDirectory();">leave directory</button>
+<br>
+<button onclick="showPreview();">preview</button>
+<br>
+<button onclick="editFile();">edit</button>
+<br>
+<button onclick="deleteFile();">delete file</button>
+<br>
+<button onclick="downloadFile();">download</button>
 <hr>
 <table id="fileList" border="1" style="width: 50%">
     <tr>

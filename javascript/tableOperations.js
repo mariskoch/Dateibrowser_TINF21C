@@ -20,6 +20,7 @@ function refreshTable() {
             console.log(response);
             for (let i = 0; i < response.length; i++) {
                 let row = table.insertRow(i+1);
+                row.setAttribute("onclick", "highlightRow(this, document.getElementById(\"fileList\"));");
                 let cell1 = row.insertCell(0);
                 let cell2 = row.insertCell(1);
                 cell1.innerText = response[i].Name;
@@ -28,4 +29,26 @@ function refreshTable() {
         }
     });
     req.send();
+}
+
+function highlightRow(row, table) {
+    for (let i = 1; i < table.rows.length; i++) {
+        table.rows[i].setAttribute("style", "background-color: white");
+    }
+    row.setAttribute("style", "background-color: lightgrey");
+    let type = row.cells[1].innerText;
+    switch (type) {
+        case type.startsWith("dir"):
+            break;
+        case type.startsWith("text"):
+            break;
+        case type.startsWith("image"):
+            break;
+        case type.startsWith("audio"):
+            break;
+        case type.startsWith("video"):
+            break;
+        default:
+            break;
+    }
 }

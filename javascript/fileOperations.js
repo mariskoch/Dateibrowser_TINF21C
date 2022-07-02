@@ -7,6 +7,9 @@ function addFile(event) {
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
         let params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
+        //TODO: remove
+        console.log(valFromDataURL[0]);
+        console.log(valFromDataURL[2]);
         let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + input.name;
         let req = new XMLHttpRequest();
         req.open('POST', url, true);
