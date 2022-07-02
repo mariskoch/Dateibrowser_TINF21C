@@ -25,32 +25,38 @@
     <label for="uploadField">Upload file: </label><input type="file" id="uploadField"
                                                          onchange="addFile(event);">
 </form>
-<hr>
+<!--<hr>
 <label for="toDelete">insert name of file/directory to delete: </label><input type="text" id="toDelete"><br>
-<button onclick="deleteFile();">delete file</button>
+<button onclick="deleteFile();">delete file</button>-->
 <hr>
 <label for="directoryToAdd">insert name of directory: </label><input type="text" id="directoryToAdd"><br>
 <button onclick="addDirectory();">add directory</button>
-<hr>
+<!--<hr>
 <label for="enterDirectory">directory to enter: </label><input type="text" id="enterDirectory"><br>
 <button onclick="enterDirectory();">enter directory</button>
 <br>
-<button onclick="goToParentDirectory();">leave directory</button>
-<hr>
+<button onclick="goToParentDirectory();">leave directory</button>-->
+<!--<hr>
 <label for="preview">show preview: </label><input type="text" id="preview"><br>
-<button onclick="showPreview();">preview</button>
+<button onclick="showPreview();">preview</button>-->
 <hr>
-<button onclick="enterDirectory();">enter directory</button>
+
+
+
+<button onclick="enterDirectory();" id="enterDirectory">enter directory</button>
 <br>
-<button onclick="goToParentDirectory();">leave directory</button>
+<button onclick="goToParentDirectory();" id="leaveDirectory">leave directory</button>
 <br>
-<button onclick="showPreview();">preview</button>
+<button onclick="showPreview();" id="showPreview">preview</button>
 <br>
-<button onclick="editFile();">edit</button>
+<button onclick="editFile();" id="edit">edit</button>
 <br>
-<button onclick="deleteFile();">delete file</button>
+<button onclick="deleteFile();" id="delete">delete file</button>
 <br>
-<button onclick="downloadFile();">download</button>
+<button onclick="downloadFile();" id="download">download</button>
+
+
+
 <hr>
 <table id="fileList" border="1" style="width: 50%">
     <tr>

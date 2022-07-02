@@ -19,7 +19,7 @@ function refreshTable() {
             let response = JSON.parse(req.responseText);
             console.log(response);
             for (let i = 0; i < response.length; i++) {
-                let row = table.insertRow(i+1);
+                let row = table.insertRow(i + 1);
                 row.setAttribute("onclick", "highlightRow(this, document.getElementById(\"fileList\"));");
                 let cell1 = row.insertCell(0);
                 let cell2 = row.insertCell(1);
@@ -36,19 +36,46 @@ function highlightRow(row, table) {
         table.rows[i].setAttribute("style", "background-color: white");
     }
     row.setAttribute("style", "background-color: lightgrey");
+    let enterButton = document.getElementById("enterDirectory");
+    let leaveButton = document.getElementById("leaveDirectory");
+    let previewButton = document.getElementById("showPreview");
+    let editButton = document.getElementById("edit");
+    let deleteButton = document.getElementById("delete");
+    let downloadButton = document.getElementById("download");
+
+    enterButton.disabled = false;
+    leaveButton.disabled = false;
+    previewButton.disabled = false;
+    editButton.disabled = false;
+    deleteButton.disabled = false;
+    downloadButton.disabled = false;
+
     let type = row.cells[1].innerText;
-    switch (type) {
-        case type.startsWith("dir"):
-            break;
-        case type.startsWith("text"):
-            break;
-        case type.startsWith("image"):
-            break;
-        case type.startsWith("audio"):
-            break;
-        case type.startsWith("video"):
-            break;
-        default:
-            break;
+    if (type.startsWith("dir")) {
+        previewButton.disabled = true;
+        editButton.disabled = true;
+        downloadButton.disabled = true;
+    } else if (type.startsWith("text")) {
+        enterButton.disabled = true;
+        leaveButton.disabled = true;
+    } else if (type.startsWith("image")) {
+        enterButton.disabled = true;
+        leaveButton.disabled = true;
+        editButton.disabled = true;
+    } else if (type.startsWith("audio")) {
+        enterButton.disabled = true;
+        leaveButton.disabled = true;
+        editButton.disabled = true;
+    } else if (type.startsWith("video")) {
+        enterButton.disabled = true;
+        leaveButton.disabled = true;
+        editButton.disabled = true;
+    } else {
+        enterButton.disabled = true;
+        leaveButton.disabled = true;
+        previewButton.disabled = true;
+        editButton.disabled = true;
+        deleteButton.disabled = true;
+        downloadButton.disabled = true;
     }
 }
