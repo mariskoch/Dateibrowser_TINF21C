@@ -17,7 +17,8 @@ function addDirectory() {
 }
 
 function enterDirectory() {
-    let directoryName = document.getElementById("enterDirectory").value;
+    let table = document.getElementById("fileList");
+    let directoryName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
     sessionStorage.setItem("currentPath", sessionStorage.getItem("currentPath") + directoryName + "/");
     refreshTable();
 }

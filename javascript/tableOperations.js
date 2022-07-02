@@ -33,6 +33,9 @@ function refreshTable() {
 
 function highlightRow(row, table) {
     for (let i = 1; i < table.rows.length; i++) {
+        if (table.rows[i].cells[0] === row.cells[0] && table.rows[i].cells[1] === row.cells[1]) {
+            sessionStorage.setItem("highlightedRowIndex", i.toString());
+        }
         table.rows[i].setAttribute("style", "background-color: white");
     }
     row.setAttribute("style", "background-color: lightgrey");
@@ -52,6 +55,9 @@ function highlightRow(row, table) {
 
     let type = row.cells[1].innerText;
     if (type.startsWith("dir")) {
+        if (sessionStorage.getItem("currentPath") === "") {
+            leaveButton.disabled = true;
+        }
         previewButton.disabled = true;
         editButton.disabled = true;
         downloadButton.disabled = true;
