@@ -1,7 +1,7 @@
 function addDirectory() {
     let directoryName = document.getElementById("directoryToAdd").value;
     let formData = new FormData();
-    let url = "http://localhost:8080/" + directoryName;
+    let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + directoryName;
     let req = new XMLHttpRequest();
     req.open('POST', url, true);
     req.setRequestHeader("Accept", "application/json");
@@ -16,3 +16,16 @@ function addDirectory() {
     req.send(formData);
 }
 
+function enterDirectory() {
+    let directoryName = document.getElementById("enterDirectory").value;
+    sessionStorage.setItem("currentPath", sessionStorage.getItem("currentPath") + directoryName + "/");
+    refreshTable();
+}
+
+function goToParentDirectory() {
+    let path = sessionStorage.getItem("currentPath");
+    let parentPath = path.substring(0, path.substring(0,path.length-1).lastIndexOf("\/")+1);
+    console.log(parentPath);
+    sessionStorage.setItem("currentPath", parentPath);
+    refreshTable();
+}

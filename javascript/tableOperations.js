@@ -10,7 +10,8 @@ function refreshTable() {
     clearTable();
     let table = document.getElementById("fileList");
     let req = new XMLHttpRequest();
-    req.open('GET', 'http://localhost:8080/', true);
+    let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath");
+    req.open('GET', url, true);
     req.setRequestHeader("Accept", "application/json");
     req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
     req.addEventListener("readystatechange", function () {

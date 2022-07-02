@@ -10,6 +10,7 @@ function login() {
                 document.getElementById("authenticationStatus").innerText = "logged in";
                 console.log(response);
                 sessionStorage.setItem("authenticationString", "Basic " + btoa(formData.get("username") + ":" + response.token));
+                sessionStorage.setItem("currentPath", "");
                 refreshTable();
             } else {
                 clearTable();
