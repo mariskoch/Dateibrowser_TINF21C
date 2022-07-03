@@ -42,10 +42,7 @@
 <hr>
 <button onclick="switchVisibility()" id="visibilitySwitch">open file creator</button>
 <div id="creatingWindow">
-    <label for="fileName">enter name of file: </label><input type="text" id="fileName">
-    <button onclick="createFile();">create</button>
-    <br>
-    <textarea name="creator" id="creator" cols="150" rows="20"></textarea>
+
 </div>
 <hr>
 <button id="go-forward" onclick="history.forward()">Go Forward!</button>
@@ -57,14 +54,13 @@
 <br>
 <button onclick="goToParentDirectory();" id="leaveDirectory">leave directory</button>
 <br>
-<button onclick="showPreview();" id="showPreview">preview</button>
+<button onclick="showPreview();" id="showPreview">preview</button><button onclick="clearPreviews();">clear previews</button>
 <br>
 <button onclick="editFile();" id="edit">edit</button>
 <br>
 <button onclick="deleteFile();" id="delete">delete file</button>
 <br>
 <button onclick="downloadFile();" id="download">download</button>
-
 
 
 <hr>
@@ -77,10 +73,8 @@
 </table>
 <hr>
 <div id="editingWindow">
-    <p id="fileToEdit">File: </p>
-    <button onclick="saveFile()">Save</button>
-    <br>
-    <textarea name="editor" id="editor" cols="150" rows="20"></textarea>
+
 </div>
+<div id="previews"></div>
 </body>
 </html>

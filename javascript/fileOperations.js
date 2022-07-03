@@ -72,8 +72,11 @@ function downloadURI(uri, name) {
 }
 
 function editFile() {
+    document.getElementById("editingWindow").innerHTML = `<p id="fileToEdit">File: </p>
+    <button onclick="saveFile()">Save</button>
+    <br>
+    <textarea name="editor" id="editor" cols="150" rows="20"></textarea>`;
     document.getElementById("editor").value = "";
-    document.getElementById("editingWindow").style.visibility = "visible";
 
     let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
     let name = row.cells[0].innerText;
@@ -114,7 +117,7 @@ function saveFile() {
     });
     req.send(params);
 
-    document.getElementById("editingWindow").style.visibility = "hidden";
+    document.getElementById("editingWindow").innerHTML = ``;
 }
 
 function createFile() {
@@ -136,12 +139,15 @@ function createFile() {
     });
     req.send(params);
 
-
     document.getElementById("visibilitySwitch").style.visibility = "visible";
-    document.getElementById("creatingWindow").style.visibility = "hidden";
+    document.getElementById("creatingWindow").innerHTML = ``;
 }
 
 function switchVisibility() {
+    document.getElementById("creatingWindow").innerHTML = `
+<label for="fileName">enter name of file: </label><input type="text" id="fileName">
+    <button onclick="createFile();">create</button>
+    <br>
+    <textarea name="creator" id="creator" cols="150" rows="20"></textarea>`;
     document.getElementById("visibilitySwitch").style.visibility = "hidden";
-    document.getElementById("creatingWindow").style.visibility = "visible";
 }

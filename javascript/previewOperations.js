@@ -1,35 +1,62 @@
 function showPreview() {
-    let name = document.getElementById("preview").value;
+    let table = document.getElementById("fileList");
+    let name = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
+    let type = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[1].innerText;
+
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name + "?format=base64";
     let req = new XMLHttpRequest();
     req.open('GET', url, true);
-    //req.setRequestHeader("Accept", "application/json");
     req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
     req.addEventListener("readystatechange", function () {
         if (req.readyState === 4) {
-            console.log(req.response);
-            let dataURL = "data:image/jpeg;base64," + req.responseText;
+            let dataURL = "data:" + type + ";base64," + req.responseText;
             console.log(dataURL);
-            /*let img = new Image();
-            img.src = dataURL;
-            //img.setAttribute("src", dataURL);
-            //img.setAttribute("alt", "random image");
-            document.body.appendChild(img);*/
+            if (type.startsWith("image")) {
+                base64ToImage(dataURL);
+            } else if (type.startsWith("audio")) {
+                base64ToAudio(dataURL);
+            } else if (type.startsWith("video")) {
+                base64ToVideo(dataURL);
+            } else if (type.startsWith("text")) {
+                previewText(req.responseText);
+            }
 
-            Base64ToImage(dataURL, function(img) {
-                console.log("add image");
-                document.body.appendChild(img);
-            });
         }
     });
     req.send();
 }
 
-function Base64ToImage(base64img, callback) {
+function base64ToImage(base64img) {
     let img = new Image();
-    img.onload = function() {
-        callback(img);
-    };
     img.src = base64img;
-    callback(img);
+    document.getElementById("previews").appendChild(img);
+}
+
+function base64ToAudio(base64audio){
+    let audio = new Audio();
+    audio.src = base64audio;
+    audio.controls = true;
+    document.getElementById("previews").appendChild(audio);
+}
+
+function base64ToVideo(base64video){
+    let vid = document.createElement("video");
+    vid.controls = true;
+    let src = document.createElement("source");
+    src.src = base64video
+    vid.appendChild(src);
+    document.getElementById("previews").appendChild(vid);
+}
+
+function previewText(text) {
+    let field = document.createElement("textarea");
+    field.cols = 150;
+    field.rows = 20;
+    field.readOnly = true;
+    field.value = atob(text);
+    document.getElementById("previews").appendChild(field);
+}
+
+function clearPreviews() {
+    document.getElementById("previews").innerHTML = ``;
 }

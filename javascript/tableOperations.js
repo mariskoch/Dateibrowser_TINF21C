@@ -1,6 +1,5 @@
 function init() {
-    document.getElementById("editingWindow").style.visibility = "hidden";
-    document.getElementById("creatingWindow").style.visibility = "hidden";
+
 }
 
 function clearTable() {
