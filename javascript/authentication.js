@@ -1,3 +1,5 @@
+
+
 function login() {
     let formData = new FormData(document.getElementById("credentialForm"));
     let req = new XMLHttpRequest();

@@ -21,6 +21,10 @@ function enterDirectory() {
     let directoryName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
     sessionStorage.setItem("currentPath", sessionStorage.getItem("currentPath") + directoryName + "/");
     refreshTable();
+
+    let obj = {path: sessionStorage.getItem("currentPath") };
+    console.log(obj);
+    window.history.pushState(obj, "");
 }
 
 function goToParentDirectory() {
@@ -29,4 +33,8 @@ function goToParentDirectory() {
     console.log(parentPath);
     sessionStorage.setItem("currentPath", parentPath);
     refreshTable();
+
+    let obj = {path: sessionStorage.getItem("currentPath") };
+    console.log(obj);
+    window.history.pushState(obj, "");
 }

@@ -8,6 +8,7 @@
     <script type="text/javascript" src="../javascript/tableOperations.js"></script>
     <script type="text/javascript" src="../javascript/directoryOperations.js"></script>
     <script type="text/javascript" src="../javascript/previewOperations.js"></script>
+    <script type="text/javascript" src="../javascript/historyOperations.js"></script>
 </head>
 <body>
 <h3>Demonstration</h3>
@@ -40,7 +41,9 @@
 <label for="preview">show preview: </label><input type="text" id="preview"><br>
 <button onclick="showPreview();">preview</button>-->
 <hr>
-
+<button id="go-forward" onclick="history.forward()">Go Forward!</button>
+<button id="go-backward" onclick="history.back()">Go Back!</button>
+<hr>
 
 
 <button onclick="enterDirectory();" id="enterDirectory">enter directory</button>
