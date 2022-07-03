@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../javascript/previewOperations.js"></script>
     <script type="text/javascript" src="../javascript/historyOperations.js"></script>
 </head>
-<body onload="init()">
+<body>
 <h3>Demonstration</h3>
 <p id="authenticationStatus">logged out</p>
 <hr>
@@ -25,30 +25,16 @@
 <form>
     <label for="uploadField">Upload file: </label><input type="file" id="uploadField" onchange="addFile(event);">
 </form>
-<!--<hr>
-<label for="toDelete">insert name of file/directory to delete: </label><input type="text" id="toDelete"><br>
-<button onclick="deleteFile();">delete file</button>-->
 <hr>
 <label for="directoryToAdd">insert name of directory: </label><input type="text" id="directoryToAdd"><br>
 <button onclick="addDirectory();">add directory</button>
-<!--<hr>
-<label for="enterDirectory">directory to enter: </label><input type="text" id="enterDirectory"><br>
-<button onclick="enterDirectory();">enter directory</button>
-<br>
-<button onclick="goToParentDirectory();">leave directory</button>-->
-<!--<hr>
-<label for="preview">show preview: </label><input type="text" id="preview"><br>
-<button onclick="showPreview();">preview</button>-->
 <hr>
 <button onclick="switchVisibility()" id="visibilitySwitch">open file creator</button>
-<div id="creatingWindow">
-
-</div>
+<div id="creatingWindow"></div>
 <hr>
 <button id="go-forward" onclick="history.forward()">Go Forward!</button>
 <button id="go-backward" onclick="history.back()">Go Back!</button>
 <hr>
-
 
 <button onclick="enterDirectory();" id="enterDirectory">enter directory</button>
 <br>
@@ -62,7 +48,6 @@
 <br>
 <button onclick="downloadFile();" id="download">download</button>
 
-
 <hr>
 <p id="pathDisplay">root/</p>
 <table id="fileList" border="1" style="width: 50%">
@@ -72,9 +57,7 @@
     </tr>
 </table>
 <hr>
-<div id="editingWindow">
-
-</div>
+<div id="editingWindow"></div>
 <div id="previews"></div>
 </body>
 </html>

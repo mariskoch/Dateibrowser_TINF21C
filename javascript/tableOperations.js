@@ -1,7 +1,3 @@
-function init() {
-
-}
-
 function clearTable() {
     let table = document.getElementById("fileList");
     table.innerHTML = `<tr>
@@ -56,10 +52,6 @@ function highlightRow(row, table) {
     editButton.disabled = false;
     deleteButton.disabled = false;
     downloadButton.disabled = false;
-
-    if (sessionStorage.getItem("currentPath") === "") {
-        leaveButton.disabled = true;
-    }
 
     let type = row.cells[1].innerText;
     if (type.startsWith("dir")) {
