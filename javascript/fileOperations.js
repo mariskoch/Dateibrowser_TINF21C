@@ -7,13 +7,6 @@ function addFile(event) {
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
         let params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
-        console.log("start!!!");
-        console.log(fileReader.result === "data:" + valFromDataURL[1] + ";base64," + valFromDataURL[2]);
-        console.log(fileReader.result);
-        console.log(valFromDataURL);
-        console.log(valFromDataURL[1]);
-        console.log(valFromDataURL[2]);
-        console.log(params);
         let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + input.name;
         let req = new XMLHttpRequest();
         req.open('POST', url, true);
@@ -76,4 +69,79 @@ function downloadURI(uri, name) {
     link.click();
     document.body.removeChild(link);
     delete link;
+}
+
+function editFile() {
+    document.getElementById("editor").value = "";
+    document.getElementById("editingWindow").style.visibility = "visible";
+
+    let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
+    let name = row.cells[0].innerText;
+    document.getElementById("fileToEdit").innerText = "File: " + name;
+
+    let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name;
+    let req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
+    req.addEventListener("readystatechange",function () {
+        if (req.readyState === 4) {
+            if (req.status === 200) {
+                document.getElementById("editor").value = req.responseText;
+            }
+        }
+    });
+    req.send();
+}
+
+function saveFile() {
+    let newText = document.getElementById("editor").value;
+    let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
+    let name = row.cells[0].innerText;
+    let type = row.cells[1].innerText;
+
+    let params = "type=" + type + "&content=" + btoa(newText);
+    let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name;
+    let req = new XMLHttpRequest();
+    req.open('POST', url, true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
+    req.addEventListener("readystatechange", function () {
+        if (req.readyState === 4) {
+            console.log(req.responseText);
+            refreshTable();
+        }
+    });
+    req.send(params);
+
+    document.getElementById("editingWindow").style.visibility = "hidden";
+}
+
+function createFile() {
+    let newText = document.getElementById("creator").value;
+    let name = document.getElementById("fileName").value;
+
+    let params = "type=text/plain&content=" + btoa(newText);
+    let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name;
+    let req = new XMLHttpRequest();
+    req.open('POST', url, true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.setRequestHeader("Accept", "application/json");
+    req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
+    req.addEventListener("readystatechange", function () {
+        if (req.readyState === 4) {
+            console.log(req.responseText);
+            refreshTable();
+        }
+    });
+    req.send(params);
+
+
+    document.getElementById("visibilitySwitch").style.visibility = "visible";
+    document.getElementById("creatingWindow").style.visibility = "hidden";
+}
+
+function switchVisibility() {
+    document.getElementById("visibilitySwitch").style.visibility = "hidden";
+    document.getElementById("creatingWindow").style.visibility = "visible";
 }

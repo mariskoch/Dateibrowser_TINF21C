@@ -1,3 +1,8 @@
+function init() {
+    document.getElementById("editingWindow").style.visibility = "hidden";
+    document.getElementById("creatingWindow").style.visibility = "hidden";
+}
+
 function clearTable() {
     let table = document.getElementById("fileList");
     table.innerHTML = `<tr>
@@ -53,32 +58,28 @@ function highlightRow(row, table) {
     deleteButton.disabled = false;
     downloadButton.disabled = false;
 
+    if (sessionStorage.getItem("currentPath") === "") {
+        leaveButton.disabled = true;
+    }
+
     let type = row.cells[1].innerText;
     if (type.startsWith("dir")) {
-        if (sessionStorage.getItem("currentPath") === "") {
-            leaveButton.disabled = true;
-        }
         previewButton.disabled = true;
         editButton.disabled = true;
         downloadButton.disabled = true;
     } else if (type.startsWith("text")) {
         enterButton.disabled = true;
-        leaveButton.disabled = true;
     } else if (type.startsWith("image")) {
         enterButton.disabled = true;
-        leaveButton.disabled = true;
         editButton.disabled = true;
     } else if (type.startsWith("audio")) {
         enterButton.disabled = true;
-        leaveButton.disabled = true;
         editButton.disabled = true;
     } else if (type.startsWith("video")) {
         enterButton.disabled = true;
-        leaveButton.disabled = true;
         editButton.disabled = true;
     } else {
         enterButton.disabled = true;
-        leaveButton.disabled = true;
         previewButton.disabled = true;
         editButton.disabled = true;
         deleteButton.disabled = true;
