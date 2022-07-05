@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#authenticationStatus {
+    width: 10%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+
+.loggedOut{
+    background-color: red;
+}
+
+.topGrid {
+    float: left;
+    padding: 20px;
+}
+
+.loggedIn{
+    background-color: green;
+}
+
+button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+input[type=text]{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button:hover {
+    background: darkgreen;
+
+}
+
+table tr {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table button{
+
+}

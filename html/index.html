@@ -9,18 +9,27 @@
     <script type="text/javascript" src="../javascript/directoryOperations.js"></script>
     <script type="text/javascript" src="../javascript/previewOperations.js"></script>
     <script type="text/javascript" src="../javascript/historyOperations.js"></script>
+    <link rel="stylesheet" href="../stylesheet/style.css">
 </head>
 <body>
-<h3>Demonstration</h3>
-<p id="authenticationStatus">logged out</p>
+<h3>File browser</h3>
+<div class="topGrid">
+    <button id="go-forward" style="width: 20%;" onclick="history.forward()">Go Forward!</button>
+    <button id="go-backward" style="width: 20%;" onclick="history.back()">Go Back!</button>
+
+    <p id="errors">test</p>
+</div>
+<hr>
+<button onclick="switchVisibility()" id="visibilitySwitch">AddFile</button>
+<div id="creatingWindow"></div>
 <hr>
 <form id="credentialForm">
     <label for="username">Username: </label><input name="username" id="username" type="text"><br>
     <label for="password">Password: </label><input name="password" id="password" type="text"><br>
 </form>
 <button onclick="login();">Login</button>
-<br>
 <button onclick="logout();">Logout</button>
+<p id="authenticationStatus" class="loggedOut">logged out</p>
 <hr>
 <form>
     <label for="uploadField">Upload file: </label><input type="file" id="uploadField" onchange="addFile(event);">
@@ -29,31 +38,26 @@
 <label for="directoryToAdd">insert name of directory: </label><input type="text" id="directoryToAdd"><br>
 <button onclick="addDirectory();">add directory</button>
 <hr>
-<button onclick="switchVisibility()" id="visibilitySwitch">open file creator</button>
-<div id="creatingWindow"></div>
-<hr>
-<button id="go-forward" onclick="history.forward()">Go Forward!</button>
-<button id="go-backward" onclick="history.back()">Go Back!</button>
-<hr>
 
-<button onclick="enterDirectory();" id="enterDirectory">enter directory</button>
-<br>
-<button onclick="goToParentDirectory();" id="leaveDirectory">leave directory</button>
-<br>
-<button onclick="showPreview();" id="showPreview">preview</button><button onclick="clearPreviews();">clear previews</button>
-<br>
-<button onclick="editFile();" id="edit">edit</button>
-<br>
-<button onclick="deleteFile();" id="delete">delete file</button>
-<br>
-<button onclick="downloadFile();" id="download">download</button>
+<table style="width: 80%" id="buttonList">
+    <tr>
+        <td><button onclick="enterDirectory();" id="enterDirectory">enter directory</button></td>
+        <td><button onclick="goToParentDirectory();" id="leaveDirectory">leave directory</button></td>
+        <td><button onclick="showPreview();" id="showPreview">preview</button></td>
+        <td><button onclick="clearPreviews();">clear previews</button></td>
+        <td><button onclick="editFile();" id="edit">edit</button></td>
+        <td><button onclick="deleteFile();" id="delete">delete file</button></td>
+        <td><button onclick="downloadFile();" id="download">download</button></td>
+    </tr>
+</table>
 
 <hr>
 <p id="pathDisplay">root/</p>
-<table id="fileList" border="1" style="width: 50%">
+<table id="fileList" border="1" style="width: 100%">
     <tr>
-        <td colspan="1" style="width: 85%">Name</td>
-        <td colspan="1" style="width: 15%">Filetype</td>
+        <td colspan="1" style="width: 3%">Type</td>
+        <td colspan="1" style="width: 82%">Name</td>
+        <td colspan="1" style="width: 15%">Media type</td>
     </tr>
 </table>
 <hr>

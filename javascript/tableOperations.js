@@ -1,7 +1,8 @@
 function clearTable() {
     let table = document.getElementById("fileList");
     table.innerHTML = `<tr>
-        <td colspan="1" style="width: 85%">Name</td>
+        <td colspan="1" style="width: 3%">Type</td>
+        <td colspan="1" style="width: 82%">Name</td>
         <td colspan="1" style="width: 15%">Filetype</td>
     </tr>`;
 }
@@ -17,14 +18,39 @@ function refreshTable() {
     req.addEventListener("readystatechange", function () {
         if (req.readyState === 4) {
             let response = JSON.parse(req.responseText);
-            console.log(response);
+
             for (let i = 0; i < response.length; i++) {
+                let type = response[i].Type;
                 let row = table.insertRow(i + 1);
                 row.setAttribute("onclick", "highlightRow(this, document.getElementById(\"fileList\"));");
-                let cell1 = row.insertCell(0);
-                let cell2 = row.insertCell(1);
+                let cell0 = row.insertCell(0);
+                let cell1 = row.insertCell(1);
+                let cell2 = row.insertCell(2);
+
+                let icon = new Image();
+                icon.style.width = "25px";
+
+                if (type.startsWith("dir")) {
+                    icon.src = "../assets/directory.png"
+                    cell0.appendChild(icon);
+                } else if (type.startsWith("text")) {
+                    icon.src = "../assets/text.png"
+                    cell0.appendChild(icon);
+                } else if (type.startsWith("image")) {
+                    icon.src = "../assets/image.png"
+                    cell0.appendChild(icon);
+                } else if (type.startsWith("audio")) {
+                    icon.src = "../assets/audio.png"
+                    cell0.appendChild(icon);
+                } else if (type.startsWith("video")) {
+                    icon.src = "../assets/video.png"
+                    cell0.appendChild(icon);
+                } else {
+
+                }
+
                 cell1.innerText = response[i].Name;
-                cell2.innerText = response[i].Type;
+                cell2.innerText = type;
             }
         }
     });
@@ -33,7 +59,7 @@ function refreshTable() {
 
 function highlightRow(row, table) {
     for (let i = 1; i < table.rows.length; i++) {
-        if (table.rows[i].cells[0] === row.cells[0] && table.rows[i].cells[1] === row.cells[1]) {
+        if (table.rows[i].cells[1] === row.cells[1] && table.rows[i].cells[2] === row.cells[2]) {
             sessionStorage.setItem("highlightedRowIndex", i.toString());
         }
         table.rows[i].setAttribute("style", "background-color: white");
@@ -53,7 +79,7 @@ function highlightRow(row, table) {
     deleteButton.disabled = false;
     downloadButton.disabled = false;
 
-    let type = row.cells[1].innerText;
+    let type = row.cells[2].innerText;
     if (type.startsWith("dir")) {
         previewButton.disabled = true;
         editButton.disabled = true;
@@ -73,7 +99,5 @@ function highlightRow(row, table) {
         enterButton.disabled = true;
         previewButton.disabled = true;
         editButton.disabled = true;
-        deleteButton.disabled = true;
-        downloadButton.disabled = true;
     }
 }

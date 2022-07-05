@@ -19,7 +19,7 @@ function addDirectory() {
 function enterDirectory() {
     document.getElementById("leaveDirectory").disabled = false;
     let table = document.getElementById("fileList");
-    let directoryName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
+    let directoryName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[1].innerText;
     sessionStorage.setItem("currentPath", sessionStorage.getItem("currentPath") + directoryName + "/");
     refreshTable();
     document.getElementById("pathDisplay").innerText = "root/" + sessionStorage.getItem("currentPath");

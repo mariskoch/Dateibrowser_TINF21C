@@ -1,7 +1,7 @@
 function showPreview() {
     let table = document.getElementById("fileList");
-    let name = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
-    let type = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[1].innerText;
+    let name = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[1].innerText;
+    let type = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[2].innerText;
 
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name + "?format=base64";
     let req = new XMLHttpRequest();

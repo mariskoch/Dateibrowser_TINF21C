@@ -6,9 +6,11 @@ function addFile(event) {
     let fileReader = new FileReader();
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
-        console.log(valFromDataURL[2]);
-        let params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
-        console.log(params);
+        let params = new URLSearchParams({
+            'type': valFromDataURL[1],
+            'content': valFromDataURL[2]
+        });
+        console.log(fileReader.result === ("data:" + valFromDataURL[1] + ";base64," + valFromDataURL[2]));
         let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + input.name;
         let req = new XMLHttpRequest();
         req.open('POST', url, true);
@@ -17,7 +19,6 @@ function addFile(event) {
         req.setRequestHeader("Authorization", sessionStorage.getItem("authenticationString"));
         req.addEventListener("readystatechange", function () {
             if (req.readyState === 4) {
-                console.log(req.responseText);
                 refreshTable();
             }
         });
@@ -29,7 +30,7 @@ function addFile(event) {
 
 function deleteFile() {
     let table = document.getElementById("fileList");
-    let fileName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[0].innerText;
+    let fileName = table.rows[sessionStorage.getItem("highlightedRowIndex")].cells[1].innerText;
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + fileName;
     let req = new XMLHttpRequest();
     req.open('DELETE', url, true);
@@ -46,7 +47,7 @@ function deleteFile() {
 
 function downloadFile() {
     let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
-    let name = row.cells[0].innerText;
+    let name = row.cells[1].innerText;
 
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name + "?format=base64";
     let req = new XMLHttpRequest();
@@ -81,7 +82,7 @@ function editFile() {
     document.getElementById("editor").value = "";
 
     let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
-    let name = row.cells[0].innerText;
+    let name = row.cells[1].innerText;
     document.getElementById("fileToEdit").innerText = "File: " + name;
 
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name;
@@ -101,8 +102,8 @@ function editFile() {
 function saveFile() {
     let newText = document.getElementById("editor").value;
     let row = document.getElementById("fileList").rows[sessionStorage.getItem("highlightedRowIndex")];
-    let name = row.cells[0].innerText;
-    let type = row.cells[1].innerText;
+    let name = row.cells[1].innerText;
+    let type = row.cells[2].innerText;
 
     let params = "type=" + type + "&content=" + btoa(newText);
     let url = "http://localhost:8080/" + sessionStorage.getItem("currentPath") + name;

@@ -5,16 +5,21 @@ function login() {
     req.setRequestHeader("Accept", "application/json");
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
+            let status = document.getElementById("authenticationStatus");
             let response = JSON.parse(req.responseText);
             if (req.status === 200) {
-                document.getElementById("authenticationStatus").innerText = "logged in";
-                console.log(response);
+
+                status.innerText = "logged in";
+                status.classList.add("loggedIn");
+                status.classList.remove("loggedOut");
                 sessionStorage.setItem("authenticationString", "Basic " + btoa(formData.get("username") + ":" + response.token));
                 sessionStorage.setItem("currentPath", "");
                 refreshTable();
             } else {
                 clearTable();
-                document.getElementById("authenticationStatus").innerText = "wrong credentials - logged out";
+                status.innerText = "wrong credentials - logged out";
+                status.classList.remove("loggedIn");
+                status.classList.add("loggedOut");
                 console.log(response);
                 sessionStorage.setItem("authenticationString", "");
             }
@@ -33,7 +38,10 @@ function logout() {
             document.getElementById("authenticationStatus").innerText = "logged out";
             clearTable();
             let response = JSON.parse(req.responseText);
+            let status = document.getElementById("authenticationStatus");
             if (req.status === 200) {
+                status.classList.remove("loggedIn");
+                status.classList.add("loggedOut");
                 console.log(response);
             } else {
                 console.log(response);
