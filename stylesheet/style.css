@@ -14,13 +14,13 @@ body {
     background-color: red;
 }
 
+.loggedIn{
+    background-color: green;
+}
+
 .topGrid {
     float: left;
     padding: 20px;
-}
-
-.loggedIn{
-    background-color: green;
 }
 
 button{

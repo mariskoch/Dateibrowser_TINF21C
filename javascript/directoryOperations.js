@@ -24,9 +24,9 @@ function enterDirectory() {
     refreshTable();
     document.getElementById("pathDisplay").innerText = "root/" + sessionStorage.getItem("currentPath");
 
-    let obj = {path: sessionStorage.getItem("currentPath") };
+    let obj = {'path': sessionStorage.getItem("currentPath") };
     console.log(obj);
-    window.history.pushState(obj, "");
+    window.history.pushState(obj, "", window.location);
 }
 
 function goToParentDirectory() {
@@ -41,7 +41,7 @@ function goToParentDirectory() {
     refreshTable();
     document.getElementById("pathDisplay").innerText = "root/" + sessionStorage.getItem("currentPath");
 
-    let obj = {path: sessionStorage.getItem("currentPath") };
+    let obj = {'path': sessionStorage.getItem("currentPath") };
     console.log(obj);
-    window.history.pushState(obj, "");
+    window.history.pushState(obj, "", window.location);
 }

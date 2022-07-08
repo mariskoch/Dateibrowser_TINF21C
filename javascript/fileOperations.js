@@ -6,6 +6,7 @@ function addFile(event) {
     let fileReader = new FileReader();
     fileReader.onload = function () {
         let valFromDataURL = GetValFromDataURL(fileReader.result);
+        //params = "type=" + valFromDataURL[1] + "&content=" + valFromDataURL[2];
         let params = new URLSearchParams({
             'type': valFromDataURL[1],
             'content': valFromDataURL[2]

@@ -9,15 +9,13 @@
     <script type="text/javascript" src="../javascript/directoryOperations.js"></script>
     <script type="text/javascript" src="../javascript/previewOperations.js"></script>
     <script type="text/javascript" src="../javascript/historyOperations.js"></script>
-    <link rel="stylesheet" href="../stylesheet/style.css">
+    <!--<link rel="stylesheet" href="../stylesheet/style.css">-->
 </head>
 <body>
 <h3>File browser</h3>
 <div class="topGrid">
-    <button id="go-forward" style="width: 20%;" onclick="history.forward()">Go Forward!</button>
-    <button id="go-backward" style="width: 20%;" onclick="history.back()">Go Back!</button>
-
-    <p id="errors">test</p>
+    <button id="go-forward" onclick="history.forward()">Go Forward!</button>
+    <button id="go-backward" onclick="history.back()">Go Back!</button>
 </div>
 <hr>
 <button onclick="switchVisibility()" id="visibilitySwitch">AddFile</button>
